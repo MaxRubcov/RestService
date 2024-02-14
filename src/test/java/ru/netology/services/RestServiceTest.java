@@ -1,17 +1,19 @@
 package ru.netology.services;
+
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 
 public class RestServiceTest {
 
-    @Test
-    void shouldCalculateNumberOfMonthsOfRest() {
+    @ParameterizedTest
+    @CsvSource({
+            "2, 100000, 60000,150000",
+            "3, 10000, 3000, 20000"
+    })
+    void shouldCalculateNumberOfMonthsOfRest(int expected, int income, int expenses, int threshold) {
         RestService service = new RestService();
-
-        int income = 100000;
-        int expenses = 60000;
-        int threshold = 150000;
-        int expected = 2;
 
         int actual = service.calculate(income, expenses, threshold);
 
